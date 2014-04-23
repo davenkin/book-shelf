@@ -51,7 +51,7 @@ public class AddBookServlet extends HttpServlet {
             String author = request.getParameter("author");
 
             statement.execute(String.format("INSERT INTO BOOK VALUES(%d,'%s',%d,'%s')", isbn, name, price, author));
-
+            response.sendRedirect("display");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
