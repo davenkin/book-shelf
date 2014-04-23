@@ -1,5 +1,7 @@
 package davenkin;
 
+import org.springframework.context.ApplicationContext;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +42,8 @@ public class AddBookServlet extends HttpServlet {
         Connection connection = null;
         Statement statement = null;
         try {
-            DataSource dataSource = (DataSource) getServletContext().getAttribute("datasource");
+            ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("SPRING_CONTEXT");
+            DataSource dataSource = (DataSource) context.getBean("datasource");
 
             connection = dataSource.getConnection();
             statement = connection.createStatement();

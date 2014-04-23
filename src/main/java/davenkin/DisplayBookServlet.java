@@ -1,6 +1,7 @@
 package davenkin;
 
 import davenkin.domain.Book;
+import org.springframework.context.ApplicationContext;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,8 @@ public class DisplayBookServlet extends HttpServlet {
         Connection connection = null;
         Statement statement = null;
         try {
-            DataSource dataSource = (DataSource) getServletContext().getAttribute("datasource");
+            ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("SPRING_CONTEXT");
+            DataSource dataSource = (DataSource) context.getBean("datasource");
 
             connection = dataSource.getConnection();
             statement = connection.createStatement();
@@ -44,8 +46,12 @@ public class DisplayBookServlet extends HttpServlet {
             e.printStackTrace();
         } finally {
             try {
-                statement.close();
-                connection.close();
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
