@@ -1,29 +1,9 @@
-# Object files
-*.o
-*.csv
-target
+# IDE files
 *.iml
 *.ipr
 *.iws
+
 build
-out
 .gradle
-wrapper
-gradlew
-gradlew.bat
-email.properties
 
-# Libraries
-*.lib
-*.a
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
+*.class
