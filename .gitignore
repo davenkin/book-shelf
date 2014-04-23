@@ -2,6 +2,7 @@
 *.iml
 *.ipr
 *.iws
+info.txt
 
 build
 .gradle
