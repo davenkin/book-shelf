@@ -1,10 +1,9 @@
 package davenkin;
 
-import org.apache.commons.dbcp.BasicDataSource;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -41,11 +40,7 @@ public class AddBookServlet extends HttpServlet {
         Connection connection = null;
         Statement statement = null;
         try {
-            BasicDataSource dataSource = new BasicDataSource();
-            dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-            dataSource.setUrl("jdbc:mysql://localhost:3306/BOOKSHELF");
-            dataSource.setUsername("root");
-            dataSource.setPassword("");
+            DataSource dataSource = (DataSource) getServletContext().getAttribute("datasource");
 
             connection = dataSource.getConnection();
             statement = connection.createStatement();

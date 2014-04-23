@@ -23,4 +23,9 @@
         <url-pattern>display</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>davenkin.ContextLoadListener</listener-class>
+    </listener>
+
+
 </web-app>
