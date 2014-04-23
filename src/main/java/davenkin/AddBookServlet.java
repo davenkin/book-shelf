@@ -5,6 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by twer on 4/23/14.
@@ -33,8 +37,30 @@ public class AddBookServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
-        PrintWriter writer = response.getWriter();
-        writer.println(request.getParameter("name")+" added");
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/BOOKSHELF", "root", "");
+            statement = connection.createStatement();
+
+            int isbn = Integer.parseInt(request.getParameter("isbn"));
+            String name = request.getParameter("name");
+            int price = Integer.parseInt(request.getParameter("price"));
+            String author = request.getParameter("author");
+
+            statement.execute(String.format("INSERT INTO BOOK VALUES(%d,'%s',%d,'%s')", isbn, name, price, author));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
