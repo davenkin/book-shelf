@@ -10,7 +10,7 @@
 
     <servlet-mapping>
         <servlet-name>add-book</servlet-name>
-        <url-pattern>add</url-pattern>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -20,7 +20,7 @@
 
     <servlet-mapping>
         <servlet-name>display-book</servlet-name>
-        <url-pattern>display</url-pattern>
+        <url-pattern>/display</url-pattern>
     </servlet-mapping>
 
     <listener>
